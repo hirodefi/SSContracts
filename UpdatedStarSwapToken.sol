@@ -1252,13 +1252,9 @@ contract StarSwapToken is ERC20, Ownable {
      */
     function updateStarSwapRouter(address _router) public onlyOperator {
         require(_router != address(0), "Update router: Wrong address.");
-        
-        excludeFromFees(address(starSwapRouter), false);
 
         starSwapRouter = IUniswapV2Router02(_router);
         starSwapPair = IUniswapV2Factory(starSwapRouter.factory()).getPair(address(this), starSwapRouter.WETH());
-
-        excludeFromFees(_router, true);
 
         emit StarSwapRouterUpdated(msg.sender, address(starSwapRouter), starSwapPair);
     }
@@ -1854,4 +1850,4 @@ contract StarSwapToken is ERC20, Ownable {
         }
         return size > 0;
     }
-}
+}        
